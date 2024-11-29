@@ -6,6 +6,8 @@ import ContactForm from "./components/ContactForm/ContactForm.jsx";
 import contacts_db from "./contacts_db.json";
 
 function App() {
+  const [filter, setFilter] = useState("");
+
   const [contacts, setContacts] = useState(() => {
     const contacts = window.localStorage.getItem("contacts");
     if (contacts !== null) {
@@ -14,46 +16,30 @@ function App() {
     return contacts_db;
   });
 
-  const [filteredContacts, setFilteredContacts] = useState(() => {
-    return [...contacts];
-  });
-
   useEffect(() => {
     window.localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
-  const handleSearch = (query) => {
-    setFilteredContacts(() => {
-      return contacts.filter((contact) => {
-        const name = contact.name.toLowerCase();
-        return name.includes(query.toLowerCase());
-      });
-    });
-  };
+  let filteredContacts = contacts.filter((contact) => {
+    const name = contact.name.toLowerCase();
+    return name.includes(filter.toLowerCase());
+  });
 
-  const deleteContactById = (id) => {
-    return contacts.filter((contact) => {
-      return contact.id !== id;
-    });
-  }
+  const handleSearch = (searchQuery) => {
+    setFilter(searchQuery);
+  };
 
   const addContact = (contact) => {
     setContacts(() => {
-      return [...contacts, contact];
-    });
-
-    setFilteredContacts(() => {
       return [...contacts, contact];
     });
   };
 
   const deleteContact = (id) => {
     setContacts(() => {
-      return deleteContactById(id)
-    });
-
-    setFilteredContacts(() => {
-      return deleteContactById(id)
+      return contacts.filter((contact) => {
+        return contact.id !== id;
+      });
     });
   };
 
