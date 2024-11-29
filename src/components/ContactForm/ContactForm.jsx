@@ -45,7 +45,7 @@ const ContactForm = ({ addContactHandle }) => {
             className={css.formField}
             id={nameFieldId}
           />
-          <ErrorMessage name="name" className={css.errors} component="span" />
+          <ErrorMessage name="name" className={css.error} component="span" />
 
           <label htmlFor={numberFieldId} className={css.mt20}>
             Number
@@ -56,7 +56,7 @@ const ContactForm = ({ addContactHandle }) => {
             className={css.formField}
             id={numberFieldId}
           />
-          <ErrorMessage name="number" className={css.errors} component="span" />
+          <ErrorMessage name="number" className={css.error} component="span" />
 
           <button type="submit" className={css.mt20}>
             Add contact
