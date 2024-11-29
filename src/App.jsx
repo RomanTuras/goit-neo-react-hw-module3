@@ -49,11 +49,11 @@ function App() {
 
   const deleteContact = (id) => {
     setContacts(() => {
-      deleteContactById(id)
+      return deleteContactById(id)
     });
 
     setFilteredContacts(() => {
-      deleteContactById(id)
+      return deleteContactById(id)
     });
   };
 
